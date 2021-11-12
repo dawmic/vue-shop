@@ -7,7 +7,17 @@
     <router-view />
   </div>
 </template>
+<script>
+export default {
+  name: "App",
+  components: {},
+  data(){
+    return{
 
+    }
+  },
+};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
