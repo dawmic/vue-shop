@@ -1,5 +1,5 @@
 <template>
-  <form action="" novalidate id="contact-form">
+  <form action="" id="contact-form" class="needs-validation" novalidate>
     <h2>PERSONAL INFORMATION</h2>
     <div class="row mx-1">
       <div class="col-12 col-md-6 mt-2">
@@ -11,7 +11,12 @@
             id="email"
             title="Email"
             required
+            v-model="order.email"
           />
+          <span class="valid-feedback">Looks good!</span>
+          <span class="invalid-feedback"
+            >Email is required in valid format.</span
+          >
         </div>
       </div>
     </div>
@@ -64,6 +69,10 @@
             required
             v-model.lazy="order.firstName"
           />
+          <span class="valid-feedback">Looks good!</span>
+          <span class="invalid-feedback"
+            >Please provide a valid first name.</span
+          >
         </div>
       </div>
       <div class="col-12 col-md-6">
@@ -77,6 +86,10 @@
             required
             v-model.lazy="order.lastName"
           />
+          <span class="valid-feedback">Looks good!</span>
+          <span class="invalid-feedback"
+            >Please provide a valid last name.</span
+          >
         </div>
       </div>
       <div class="col-12 col-md-8">
@@ -90,6 +103,8 @@
             required
             v-model.lazy="order.address"
           />
+          <span class="valid-feedback">Looks good!</span>
+          <span class="invalid-feedback">Please provide a valid address.</span>
         </div>
       </div>
       <div class="col-4">
@@ -103,6 +118,8 @@
             required
             v-model.lazy="order.zip"
           />
+          <span class="valid-feedback">Looks good!</span>
+          <span class="invalid-feedback">Please provide a valid zip.</span>
         </div>
       </div>
       <div class="col-8 col-md-6">
@@ -116,6 +133,8 @@
             required
             v-model.lazy="order.city"
           />
+          <span class="valid-feedback">Looks good!</span>
+          <span class="invalid-feedback">Please provide a valid city.</span>
         </div>
       </div>
       <div class="col-12 col-md-6">
@@ -137,6 +156,8 @@
               {{ country }}
             </option>
           </select>
+          <span class="valid-feedback">Looks good!</span>
+          <span class="invalid-feedback">Please choose a valid country.</span>
         </div>
       </div>
     </div>
@@ -145,6 +166,32 @@
 </template>
 
 <script>
+(function () {
+  "use strict";
+  window.addEventListener(
+    "load",
+    function () {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName("needs-validation");
+      // Loop over them and prevent submission
+      Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener(
+          "submit",
+          function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      });
+    },
+    false
+  );
+})();
+
 import axios from "axios";
 export default {
   name: "Form",
@@ -162,12 +209,6 @@ export default {
         city: "",
         zip: "",
         state: "",
-        method: "Adres domowy",
-        business: "Adres firmowy",
-        home: "Adres domowy",
-        gift: "Wyślij jako prezent",
-        sendGift: "Wyślij jako prezent",
-        dontSendGift: "Nie wysyłaj jako prezentu",
         country: "",
       },
       countries: [],
@@ -205,5 +246,15 @@ label {
 .btn {
   display: flex;
   align-self: flex-start;
+}
+@include media-xl {
+  #contact-form {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
+.valid-feedback,
+.invalid-feedback {
+  text-align: left;
 }
 </style>
