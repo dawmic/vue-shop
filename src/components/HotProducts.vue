@@ -23,14 +23,12 @@ export default {
 
 <style lang="scss" scoped>
 .hotproducts-container {
-  height: 24rem;
-  display: flex;
+display: flex;
   flex-direction: column !important;
-
   .title {
     font-size: 0.95rem;
     text-align: left;
-    margin: 1rem;
+    margin: 2rem 0 1rem 2rem;
     letter-spacing: 2px;
     color: #063757;
     font-weight: 700;
@@ -49,8 +47,8 @@ export default {
   @include media-xl {
     .title,
     .new-products {
-      max-width: 80%;
-      width: 80%;
+      max-width: 90%;
+      width: 90%;
       align-self: center;
     }
   }
