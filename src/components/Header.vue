@@ -1,11 +1,11 @@
 <template>
-  <nav class="container-fluid">
+  <header class="container-fluid">
     <div class="row align-items-center mt-2">
-      <div class="col-12 col-md-6 order-md-2">
+      <div class="col-10 col-md-6  order-md-2" @click="moveToHomepage">
         <h1 clas="text-secondary d-flex justify-content-start">
           <img src="@/assets/bicycle.png" alt="bicycle logo" /> BIKES
           <!--<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>-->
-          <span class="text-warning">24/7</span>
+          <span class="text-warning logo-text">24/7</span>
         </h1>
       </div>
       <div class="input-group mt-1 mb-3 col-9 col-md-3 order-md-1">
@@ -30,7 +30,7 @@
             class="cart-icon"
             alt="shopping cart"
           />
-         <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>-->
+          <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>-->
           <span
             class="
               position-absolute
@@ -40,6 +40,7 @@
               badge
               rounded-pill
               bg-danger
+              text-light
             "
           >
             {{ cartNumber }}
@@ -47,7 +48,8 @@
         </button>
       </div>
     </div>
-  </nav>
+    <div class="row align-items-center"></div>
+  </header>
 </template>
 
 <script>
@@ -58,14 +60,19 @@ export default {
       cartNumber: 99,
     };
   },
+  methods:{
+    moveToHomepage(){
+      this.$router.push('/');
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-nav {
+header {
   min-height: 5rem;
   border-bottom: 1px solid black;
-  background: var(--light);
+
   div {
     height: 100%;
   }
@@ -82,6 +89,10 @@ h1 {
   h1 {
     width: 100%;
   }
+  .logo-text{
+    display: none;
+  }
+
 }
 @include media-sm {
   h1 {
