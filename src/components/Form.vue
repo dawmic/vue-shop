@@ -1,5 +1,10 @@
 <template>
-  <form action="" id="contact-form" class="needs-validation" novalidate>
+  <form
+    id="contact-form"
+    class="needs-validation"
+    novalidate
+    @submit.prevent="summarize"
+  >
     <h2>PERSONAL INFORMATION</h2>
     <div class="row mx-1">
       <div class="col-12 col-md-6 mt-2">
@@ -30,8 +35,11 @@
             id="mr"
             v-model="order.title"
             v-bind:value="Mr"
+            required
           />
           <label class="form-check-label" for="mr"> Mr </label>
+          <span class="valid-feedback">Looks good!</span>
+          <span class="invalid-feedback">Title is required</span>
         </div>
         <div class="form-check m-2">
           <input
@@ -41,6 +49,7 @@
             id="ms"
             v-model="order.title"
             v-bind:value="Ms"
+            required
           />
           <label class="form-check-label" for="ms"> Ms </label>
         </div>
@@ -52,6 +61,7 @@
             id="company"
             v-model="order.title"
             v-bind:value="Company"
+            required
           />
           <label class="form-check-label" for="company"> Company </label>
         </div>
@@ -161,11 +171,16 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary m-3">Summary</button>
+    <button type="submit" @click="summarize" class="btn btn-primary m-3">
+      Summary
+    </button>
+    <div v-if="spinner" class="spinner-4"></div>
   </form>
 </template>
 
 <script>
+let validated = false;
+/*
 (function () {
   "use strict";
   window.addEventListener(
@@ -183,6 +198,9 @@
               event.stopPropagation();
             }
             form.classList.add("was-validated");
+            if (form.checkValidity() === true) {
+              validated = true;
+            }
           },
           false
         );
@@ -191,7 +209,7 @@
     false
   );
 })();
-
+*/
 import axios from "axios";
 export default {
   name: "Form",
@@ -201,7 +219,7 @@ export default {
       Ms: "Ms",
       Company: "Company",
       order: {
-        title: "Mr",
+        title: "",
         firstName: "",
         lastName: "",
         email: "",
@@ -212,8 +230,10 @@ export default {
         country: "",
       },
       countries: [],
+      spinner: false,
     };
   },
+
   created() {
     axios
       .get("/countries.json")
@@ -221,6 +241,37 @@ export default {
         this.countries = res.data.country;
       })
       .catch((err) => console.log(err));
+  },
+  mounted() {
+    var forms = document.getElementsByClassName("needs-validation");
+    Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add("was-validated");
+          if (form.checkValidity() === true) {
+            validated = true;
+          }
+        },
+        false
+      );
+    });
+  },
+  methods: {
+    summarize() {
+      if (validated) {
+        this.spinner = true;
+
+        setTimeout(() => {
+          this.$emit("emitOrder", this.order);
+          this.$router.push("/form/ordersummary");
+        }, 2000);
+      }
+    },
   },
 };
 </script>
@@ -256,5 +307,34 @@ label {
 .valid-feedback,
 .invalid-feedback {
   text-align: left;
+}
+
+.spinner-4 {
+  position: absolute;
+  top: 48%;
+  left: 48%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(#0000 10%, #f03355) content-box;
+  -webkit-mask: repeating-conic-gradient(
+      #0000 0deg,
+      #000 1deg 20deg,
+      #0000 21deg 36deg
+    ),
+    radial-gradient(
+      farthest-side,
+      #0000 calc(100% - 9px),
+      #000 calc(100% - 8px)
+    );
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: s4 1s infinite steps(10);
+}
+@keyframes s4 {
+  to {
+    transform: rotate(1turn);
+  }
 }
 </style>
