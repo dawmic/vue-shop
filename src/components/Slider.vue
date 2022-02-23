@@ -1,15 +1,6 @@
 <template>
   <div
-    class="
-      carousel-header carousel
-      slide
-      col-12
-      mt-3
-      col-sm-10
-      offset-sm-1
-      col-xl-8
-      offset-xl-2
-    "
+    class="carousel-header carousel slide col-12 mt-0 p-0"
     data-ride="carousel"
   >
     <div class="carousel-inner">
@@ -49,27 +40,35 @@ export default {
 
 <style lang="scss" scoped>
 .slideImg {
-  height: 15rem;
+  height: auto;
+ // max-height: 22.5rem;
 }
 
 @include media-sm {
   .slideImg {
-    height: 16rem;
-  }
+    //height: 13rem;
+    height: auto;
+}
 }
 @include media-md {
   .slideImg {
-    height: 20rem;
+    height: 16.5rem;
   }
 }
 @include media-lg {
   .slideImg {
-    height: 22rem;
+    height: 21.375rem;
+    
   }
 }
 @include media-xl {
   .slideImg {
-    height: 26rem;
-  }
+    height: 24.6875rem;
 }
+}
+@include media-xxl{
+  .slideImg{
+    height: 31.25rem;
+  }
+} 
 </style>
