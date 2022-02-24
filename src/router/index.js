@@ -9,13 +9,14 @@ Vue.use(VueRouter);
 
 const routes = [{
         path: "/",
-        name: "Main",
+        name: "Everything for your bike",
         component: Main,
     },
     {
         path: "/cart",
         name: "Cart",
         component: Cart,
+
     },
     {
         path: "/form",
@@ -24,7 +25,7 @@ const routes = [{
     },
     {
         path: "/form/ordersummary",
-        name: "OrderSummary",
+        name: "Order Summary",
         component: OrderSummary,
     },
     {
@@ -44,4 +45,9 @@ const router = new VueRouter({
     routes,
 });
 
+router.beforeEach((to, from, next) => {
+    console.log(to);
+    document.title = `Bike24/7 - ${to.name}`; 
+    next()
+  })
 export default router;
