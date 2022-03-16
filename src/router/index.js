@@ -4,6 +4,7 @@ import Main from "../components/Main.vue";
 import Form from "../components/Form.vue";
 import OrderSummary from "../components/OrderSummary.vue";
 import Cart from "../components/Cart.vue";
+import ProductDetails from "../components/ProductDetails.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,12 @@ const routes = [{
         path: "/form/ordersummary",
         name: "Order Summary",
         component: OrderSummary,
+    },
+    {
+        path: "/product/:title",
+        name: "product",
+        component: ProductDetails,
+        props: true,
     },
     {
         path: "/about",

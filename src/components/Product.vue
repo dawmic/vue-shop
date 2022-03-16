@@ -1,5 +1,5 @@
 <template>
-  <div class="product-container card-body mx-lg-3 mb-lg-4">
+  <div class="product-container card-body mx-lg-3 mb-lg-4" @click="goToDetails">
     <h2 class="p-title card-title mt-3 ml-3">{{ product.title }}</h2>
     <p class="p-description ml-3">{{ product.description }}</p>
     <img class="p-image" :src="product.image" alt="" />
@@ -26,6 +26,10 @@ export default {
   methods: {
     checkRating(n, product) {
       return product.rating - n >= 0;
+    },
+    goToDetails(){
+      
+      this.$router.push({ name: 'product', params: { product: this.product, title: this.product.title } });
     },
   },
 };
