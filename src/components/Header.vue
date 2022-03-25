@@ -24,11 +24,13 @@
         <button
           type="button"
           class="btn btn-light position-relative mb-2 offset-md-1"
+          @click="moveToCart"
         >
           <img
             src="@/assets/shopping-cart.png"
             class="cart-icon"
             alt="shopping cart"
+
           />
           <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>-->
           <span
@@ -63,8 +65,11 @@ export default {
   methods:{
     moveToHomepage(){
       this.$router.push('/');
+    },
+    moveToCart(){
+      this.$router.push('/Cart');
     }
-  }
+  },
 };
 </script>
 

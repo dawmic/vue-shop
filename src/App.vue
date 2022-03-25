@@ -5,18 +5,16 @@
         <p class="col-12 fs-6 text-light">Safe Covid-19 delivery</p>
       </div>
     </div>
-    <Header />
-    <Slider />
+    
     <router-view :products="products" />
   </div>
 </template>
 <script>
-import Header from "./components/Header.vue";
-import Slider from "./components/Slider.vue";
+
 import axios from "axios";
 export default {
   name: "App",
-  components: { Header, Slider },
+  components: {},
   data() {
     return {
       filter: "",
@@ -55,6 +53,7 @@ export default {
   color: #2c3e50;
   .covid-info {
     height: 50px;
+    background-color: #006496;
     p {
       height: auto;
       margin: 0;

@@ -1,19 +1,19 @@
 {
     "products": [{
             "id": 1001,
-            "title": "Cube Agree",
-            "description": "Road Bike ",
-            "price": 14999.00,
-            "image": "assets/images/product-fullsize.png",
+            "title": "Rondo",
+            "description": "Rondo RUUT CF1 - SRAM Force 1 Carbon Gravelbike - 2022 - Black/White",
+            "price": "$2799",
+            "image": "https://images.bike24.net/media/366/i/mb/45/8e/d7/ruut-cf1-black-white-1153227.jpg",
             "availableInventory": 10,
             "rating": 3
         },
         {
             "id": 1002,
-            "title": "Nitka",
-            "description": "Nitka, z którą twój kot będzie się mógł bawić <strong>bardzo</strong> długo!",
-            "price": 799,
-            "image": "assets/images/yarn.jpg",
+            "title": "Cube",
+            "description": "CUBE ANALOG - Mountainbike - 2022 - flashlime/black A00",
+            "price": "$799",
+            "image": "https://images.bike24.net/i/mb/cf/ab/d8/analog-flashlime-black-1053866.jpg",
             "availableInventory": 7,
             "rating": 1
         },
