@@ -277,6 +277,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#contact-form{
+  min-height: calc(100vh - 220.4px);
+  @include media-md{
+    min-height: calc(100vh - 146px);
+  }
+}
 h2 {
   color: #063757;
   letter-spacing: 2px;
