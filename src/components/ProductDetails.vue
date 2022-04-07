@@ -22,26 +22,35 @@
             >Ships immediately - Delivery time to Poland 3-6 days</span
           >
         </div>
-        <div class="add-to-cart-container col-12">
+        <div class="add-to-cart-container col-12 mb-3 mt-1">
           <div class="quantity-container">
-            <img
-              class="quantity-icon"
-              @click="removeOneProduct"
-              src="@/assets/quantity/minus-line.svg"
-              alt="one less product"
-            /><input
+            <button class="quantity-button">
+              <img
+                class="quantity-icon"
+                @click="removeOneProduct"
+                src="@/assets/quantity/minus-line.svg"
+                alt="one less product"
+              />
+            </button>
+            <input
+              class="quantity-input"
               v-model.number="count"
               type="number"
-              min="1"
+              inputmode="numeric"
               max="999"
+              min="1"
               pattern="[0-9]*"
+              @keypress="isNumberKey($event)"
+              @input="isMaxChars($event.target)"
             />
-            <img
-              class="quantity-icon"
-              @click="addOneProduct"
-              src="@/assets/quantity/plus-line.svg"
-              alt="one more product"
-            />
+            <button class="quantity-button">
+              <img
+                class="quantity-icon"
+                @click="addOneProduct"
+                src="@/assets/quantity/plus-line.svg"
+                alt="one more product"
+              />
+            </button>
           </div>
           <button class="add-to-cart-button">ADD TO CART</button>
         </div>
@@ -69,10 +78,28 @@ export default {
   methods: {
     addOneProduct() {
       this.count++;
+      if (this.count > 999) {
+        this.count = 999;
+      }
     },
     removeOneProduct() {
       this.count--;
       if (this.count <= 1) this.count = 1;
+    },
+    isNumberKey($event) {
+      if ($event.charCode >= 48 && $event.charCode <= 57) {
+        return true;
+      } else {
+        $event.preventDefault();
+      }
+    },
+    isMaxChars(el) {
+      const max_chars = 3;
+      if (el.value.length > max_chars) {
+        el.value = el.value.substr(0, max_chars);
+        console.log(el.value);
+        this.count = parseInt(el.value);
+      }
     },
   },
 };
@@ -124,7 +151,6 @@ export default {
     .add-to-cart-container {
       display: flex;
       flex-direction: row;
-      flex-basis: 0;
       .add-to-cart-button {
         flex: 2;
         border: none;
@@ -140,7 +166,6 @@ export default {
         flex-direction: row;
         align-items: center;
         justify-content: center;
-
         height: 50px;
         border: 0.0625rem solid #dee1e7;
         margin-right: 0.95rem;
@@ -152,12 +177,29 @@ export default {
           align-self: stretch;
           border: none;
           text-align: center;
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          /* Firefox */
+          &[type="number"] {
+            -moz-appearance: textfield;
+          }
         }
-        .quantity-icon {
-          width: 1.25rem;
-          height: 1.25rem;
-          padding: 5px;
-          cursor: pointer;
+        .quantity-button {
+          background: none;
+          border: none;
+          height: 100%;
+          &:active {
+            background-color: #efefef;
+          }
+          .quantity-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            padding: 5px;
+            cursor: pointer;
+          }
         }
       }
     }
