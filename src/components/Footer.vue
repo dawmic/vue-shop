@@ -1,7 +1,7 @@
 <template>
   <div class="footer-container container-fluid">
     <div class="row footer-row">
-      <h3 class="col-12 col-md-2  m-3 m-md-0 ml-xl-5">BIKE <span class="text-warning logo-text">24/7</span></h3>
+      <h3 class="col-10 col-md-2  m-3 m-md-0 ml-xl-5">BIKE <span class="text-warning logo-text">24/7</span></h3>
       <p class="footer-paragraph col-12 col-md-5 col-lg-4 col-xl-5 m-0">
         © COPYRIGHT 2022 Bike24/7  ALL RIGHTS RESERVED
       </p>

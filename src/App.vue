@@ -7,14 +7,16 @@
     </div>
     
     <router-view :products="products" />
+    <Footer/>
   </div>
 </template>
 <script>
 
 import axios from "axios";
+import Footer from "./components/Footer.vue"
 export default {
   name: "App",
-  components: {},
+  components: {Footer},
   data() {
     return {
       filter: "",
@@ -41,6 +43,9 @@ export default {
       console.log(res.data.products);
       this.products = res.data.products;
     });
+  },
+  updated(){
+    window.scrollTo(0, 0);
   },
 };
 </script>
