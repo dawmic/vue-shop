@@ -6,7 +6,8 @@
             "price": "$2799",
             "image": "https://images.bike24.net/media/366/i/mb/45/8e/d7/ruut-cf1-black-white-1153227.jpg",
             "availableInventory": 10,
-            "rating": 3
+            "rating": 3,
+            "details": "For long distances and fast sprints. There is no off-season, ride and train when and where you want - away from traffic and smog. The Rondo RUUT is probably the world's first gravel bike with variable geometry settings. The Rondo Ruut is the original model of the Polish brand first introduced in 2018. The bike is characterised by unprecedented versatility: Thanks to a FlipChip in the fork, the geometry of the RUUT can be changed in just a few steps. This means that the steering angle, trail and bottom bracket height can be varied as needed."
         },
         {
             "id": 1002,
@@ -15,7 +16,8 @@
             "price": "$799",
             "image": "https://images.bike24.net/i/mb/cf/ab/d8/analog-flashlime-black-1053866.jpg",
             "availableInventory": 7,
-            "rating": 1
+            "rating": 1,
+            "details":"A hardtail is a versatile beast, so it helps to have the right kit to get the most out of that versatility. That's why, with the new Analog, CUBE began by choosing SRAM's SX Eagle 1x12 transmission. With its huge range, ease of use and reliable performance, it's the go-to for many keen riders. Paired with powerful Shimano hydraulic disc brakes and 100mm of travel from the RockShox Judy fork with lockout, it puts you in perfect control. Grippy 2.25in tyres, perfect sizing from the SizeSplit system and the option for a future dropper post upgrade complete the package."
         },
         {
             "id": 1003,

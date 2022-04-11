@@ -56,6 +56,20 @@
         </div>
       </div>
     </div>
+    <div class="row p-o m-0">
+      <div class="description-container col-12">
+        <hr />
+        <h3 class="product-details-title description text-left ml-2 pb-2">
+          Description
+        </h3>
+        <h4 class="product-details-title text-left ml-2">
+          {{ product.description }}
+        </h4>
+        <p class="product-details-paragraph text-left ml-2">
+          {{ product.details }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -73,7 +87,6 @@ export default {
   },
   mounted() {
     window.scrollTo(0, 0);
-    console.log(this.product);
   },
   methods: {
     addOneProduct() {
@@ -97,7 +110,6 @@ export default {
       const max_chars = 3;
       if (el.value.length > max_chars) {
         el.value = el.value.substr(0, max_chars);
-        console.log(el.value);
         this.count = parseInt(el.value);
       }
     },
@@ -114,14 +126,14 @@ export default {
   @include media-md {
     min-height: calc(100vh - 122px);
   }
+  .product-details-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #063757;
+    line-height: 1.3;
+    letter-spacing: -1px;
+  }
   .image-details-container {
-    .product-details-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #063757;
-      line-height: 1.3;
-      letter-spacing: -1px;
-    }
     .image-details {
       width: 12rem;
     }
@@ -202,6 +214,15 @@ export default {
           }
         }
       }
+    }
+  }
+  .description-container {
+    .description {
+      font-size: 1.5rem;
+    }
+    .product-details-paragraph {
+      color: #063757;
+      line-height: 1.5;
     }
   }
 }
