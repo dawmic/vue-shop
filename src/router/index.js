@@ -35,15 +35,6 @@ const routes = [{
         component: ProductDetails,
         props: true,
     },
-    {
-        path: "/about",
-        name: "About",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import ( /* webpackChunkName: "about" */ "../views/About.vue"),
-    },
 ];
 
 const router = new VueRouter({
@@ -54,7 +45,13 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     console.log(to);
-    document.title = `Bike24/7 - ${to.name}`; 
+    if(to.params.title){
+        document.title = `Bike24/7 - ${to.params.title}`
+    }
+    else{
+        document.title = `Bike24/7 - ${to.name}`;  
+    }
+   
     next()
   })
 export default router;
