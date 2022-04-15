@@ -3,31 +3,69 @@
     <Header />
     <Categories />
     <div class="row p-0 m-0">
-      <div class="image-details-container col-12 p-0 m-0">
-        <h3 class="product-details-title text-left ml-4 mr-4">
+      <div
+        class="
+          image-details-container
+          col-12 col-md-6 col-lg-6
+          p-0
+          m-0
+          mt-md-4
+          ml-lg-5
+        "
+      >
+        <h3 class="product-details-title text-left ml-4 mr-4 d-md-none">
           {{ product.description }}
         </h3>
-        <img class="image-details" :src="product.image" alt="product image" />
+        <img class="image-details" :src="product.image" :alt="product.title" />
       </div>
-      <div class="information-container col-12 p-0 m-0">
-        <h2 class="information-product-header d-none">
+      <div
+        class="information-container col-12 col-md-6 col-lg-5 p-0 m-0 mt-md-4"
+      >
+        <h2
+          class="information-product-header text-left d-none d-md-block pr-md-3"
+        >
           {{ product.description }}
         </h2>
-        <p class="information-product-price ml-4">{{ product.price }}</p>
-        <div class="delivery-message ml-4 mb-2">
+        <p class="information-product-rate ml-4 mb-2 ml-md-0 pr-md-3">
+          Rate
+          <span
+            v-for="n in 5"
+            v-bind:key="n"
+            v-bind:class="{ productRate: checkRating(n, product) }"
+            >☆</span
+          >
+        </p>
+        <div class="size-container pr-md-3 pr-lg-4" v-if="product.size">
+          <label class="ml-3 ml-md-0" for="select-size">Frame size</label>
+          <select
+            class="ml-3 ml-md-0 mr-3 mr-md-0"
+            id="select-size"
+            v-model="selectedSize"
+          >
+            <option disabled>---</option>
+            <option :value="item" v-for="item in productSize" :key="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+        <p class="information-product-price ml-3 ml-md-0">
+          {{ product.price }}
+        </p>
+        <div class="delivery-message ml-3 mb-2 ml-md-0 pr-md-3">
           <span class="product-stock">Still 1 in stock</span>
         </div>
-        <div class="delivery-message ml-4 mb-2">
+        <div class="delivery-message ml-3 mb-2 ml-md-0 text-left pr-md-3">
           <span class="product-ship"
             >Ships immediately - Delivery time to Poland 3-6 days</span
           >
         </div>
-        <div class="add-to-cart-container col-12 mb-3 mt-1">
+        <div
+          class="add-to-cart-container col-12 mb-3 mt-1 pl-md-0 pr-md-3 pr-lg-4"
+        >
           <div class="quantity-container">
-            <button class="quantity-button">
+            <button class="quantity-button" @click="removeOneProduct">
               <img
                 class="quantity-icon"
-                @click="removeOneProduct"
                 src="@/assets/quantity/minus-line.svg"
                 alt="one less product"
               />
@@ -43,10 +81,9 @@
               @keypress="isNumberKey($event)"
               @input="isMaxChars($event.target)"
             />
-            <button class="quantity-button">
+            <button class="quantity-button" @click="addOneProduct">
               <img
                 class="quantity-icon"
-                @click="addOneProduct"
                 src="@/assets/quantity/plus-line.svg"
                 alt="one more product"
               />
@@ -57,7 +94,7 @@
       </div>
     </div>
     <div class="row p-o m-0">
-      <div class="description-container col-12">
+      <div class="description-container col-12 col-md-9">
         <hr />
         <h3 class="product-details-title description text-left ml-2 pb-2">
           Description
@@ -83,6 +120,7 @@ export default {
   data() {
     return {
       count: 1,
+      selectedSize: "---",
     };
   },
   mounted() {
@@ -113,38 +151,95 @@ export default {
         this.count = parseInt(el.value);
       }
     },
+    checkRating(n, product) {
+      return product.rating - n >= 0;
+    },
   },
+  computed: {
+    productSize() {
+    return JSON.parse(this.product.size);
+   },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+* {
+  color: #063757;
+}
 .product-details-container {
   min-height: calc(100vh - 196.4px);
   margin: 0;
   padding: 0;
   background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   @include media-md {
     min-height: calc(100vh - 122px);
+  }
+  .row {
+    max-width: 1440px;
   }
   .product-details-title {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #063757;
     line-height: 1.3;
     letter-spacing: -1px;
   }
   .image-details-container {
     .image-details {
       width: 12rem;
+      @include media-md {
+        // width: 17rem;
+        width: 70%;
+      }
     }
   }
   .information-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    .information-product-header {
+      line-height: 1.14;
+      font-size: 1.25rem;
+      letter-spacing: -1.5px;
+      @include media-md {
+        font-size: 1.5rem;
+      }
+    }
+    .information-product-rate {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    .size-container {
+      width: 100%;
+      label {
+        width: calc(100% - 16px);
+        font-weight: 700;
+        text-align: left;
+      }
+      select {
+        height: 3.125rem;
+        width: calc(100% - 32px);
+        padding-left: 0.75rem;
+        font-family: "BlenderPro", "Helvetica", "Arial", sans-serif;
+        background-color: #fff;
+        border: 0.0625rem solid #dee1e7;
+        border-radius: 0;
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      label,
+      select {
+        @include media-md {
+          width: 100%;
+        }
+      }
+    }
     .information-product-price {
       font-size: 2.125rem;
-      color: #063757;
       font-weight: 700;
       text-align: left;
     }
@@ -217,13 +312,16 @@ export default {
     }
   }
   .description-container {
+    max-width: 1440px;
     .description {
       font-size: 1.5rem;
     }
     .product-details-paragraph {
-      color: #063757;
       line-height: 1.5;
     }
   }
+}
+.productRate {
+  color: orange;
 }
 </style>
