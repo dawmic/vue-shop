@@ -27,9 +27,11 @@ export default {
     checkRating(n, product) {
       return product.rating - n >= 0;
     },
-    goToDetails(){
-      
-      this.$router.push({ name: 'product', params: { product: this.product, title: this.product.title } });
+    goToDetails() {
+      this.$router.push({
+        name: "product",
+        params: { product: this.product, id: this.product.id },
+      });
     },
   },
 };
@@ -61,7 +63,6 @@ export default {
     font-size: 1rem;
     text-align: left;
     margin: 0;
-   
   }
   .p-description {
     width: 90%;

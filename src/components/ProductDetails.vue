@@ -2,7 +2,7 @@
   <div class="product-details-container no-gutters">
     <Header />
     <Categories />
-    <div class="row p-0 m-0">
+    <div class="row p-0 m-0" v-if="!isError">
       <div
         class="
           image-details-container
@@ -26,7 +26,7 @@
         >
           {{ product.description }}
         </h2>
-        <p class="information-product-rate ml-4 mb-2 ml-md-0 pr-md-3">
+        <p class="information-product-rate ml-3 mb-2 ml-md-0 pr-md-3">
           Rate
           <span
             v-for="n in 5"
@@ -93,7 +93,7 @@
         </div>
       </div>
     </div>
-    <div class="row p-o m-0">
+    <div class="row p-o m-0" v-if="!isError">
       <div class="description-container col-12 col-md-9">
         <hr />
         <h3 class="product-details-title description text-left ml-2 pb-2">
@@ -107,26 +107,50 @@
         </p>
       </div>
     </div>
+    <div v-if="isError">
+      <!-- image is from https://www.pngitem.com/middle/iombmRT_404-error-images-free-png-transparent-png/
+      personal use only
+      -->
+      <img src="@/assets/error404.png" alt="error info" />
+    </div>
   </div>
 </template>
 
 <script>
 import Header from "./Header.vue";
 import Categories from "./Categories.vue";
+import axios from "axios";
 export default {
   name: "ProductDetails",
   components: { Header, Categories },
-  props: ["product"],
   data() {
     return {
+      product: "",
       count: 1,
       selectedSize: "---",
+      isError: false,
+      isLoading: true,
     };
   },
   mounted() {
     window.scrollTo(0, 0);
+    this.getProductData();
   },
   methods: {
+    getProductData() {
+      axios
+        .get("/products.json")
+        .then((res) => {
+          let [result] = res.data.products.filter(
+            (item) => item.id == this.$attrs.id
+          );
+          this.product = result;
+        })
+        .catch((er) => {
+          console.log(er);
+          this.isError = true;
+        });
+    },
     addOneProduct() {
       this.count++;
       if (this.count > 999) {
@@ -157,9 +181,9 @@ export default {
   },
   computed: {
     productSize() {
-    return JSON.parse(this.product.size);
-   },
-  }
+      return JSON.parse(this.product.size);
+    },
+  },
 };
 </script>
 
@@ -191,7 +215,6 @@ export default {
     .image-details {
       width: 12rem;
       @include media-md {
-        // width: 17rem;
         width: 70%;
       }
     }
@@ -267,6 +290,10 @@ export default {
         font-weight: 700;
         letter-spacing: 2px;
         height: 3.125rem;
+        cursor: pointer;
+        &:hover {
+          background-color: #e55c00;
+        }
       }
       .quantity-container {
         display: flex;

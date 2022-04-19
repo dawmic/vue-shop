@@ -30,7 +30,7 @@ const routes = [{
         component: OrderSummary,
     },
     {
-        path: "/product/:title",
+        path: "/product/:id",
         name: "product",
         component: ProductDetails,
         props: true,
